@@ -9,6 +9,7 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Keep organizer-supplied event rules in a shared browser-safe module and test concrete values, so event copy and future registration stay consistent.
+- Keep only public event facts in the shared browser-safe module; unrevealed rules must stay out of all shipped code and assets, so viewing page source cannot expose the twist.
 - Use semantic global CSS tokens and shared UI controls for the illustrated event site, so its visual language stays consistent.
 - Keep registration unavailable until the organizer supplies an actual registration destination or authorizes a stored application flow; never simulate successful applications.
+- Keep pointer and scroll animation in an isolated client effect with requestAnimationFrame, cleanup, and reduced-motion support, so interactive scenery stays smooth and accessible.
