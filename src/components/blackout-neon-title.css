@@ -1,0 +1,555 @@
+/* Retro Distortion Title Pattern for Blackout Hackathon */
+/* Custom Awwwards-Crafted Dark Purple / Electric Amethyst Palette */
+
+.uiverse-title-pattern {
+  --reset-time: 10s;
+  --neon-primary: oklch(0.31 0.098 303); /* Authentic Dark Purple #28113d */
+  --neon-glow: oklch(0.62 0.24 300);    /* Luminous Electric Violet #a855f7 */
+  --neon-highlight: oklch(0.78 0.15 300); /* Soft Radiant Amethyst #c084fc */
+  --neon-deep: oklch(0.20 0.08 303);   /* Obsidian Plum Shadow */
+  --neon-light-sheen: oklch(0.95 0.04 300); /* Crisp Titanium Lavender */
+
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  min-height: 17rem;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  font-family: var(--font-display, 'Outfit'), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  user-select: none;
+  cursor: crosshair;
+  box-sizing: border-box;
+  padding: 1.25rem 0.5rem;
+}
+
+.uiverse-title-pattern .bg-glow,
+.uiverse-title-pattern .bg-noise,
+.uiverse-title-pattern .dust-layer,
+.uiverse-title-pattern .doodle-layer,
+.uiverse-title-pattern .doodle,
+.uiverse-title-pattern .title-stage,
+.uiverse-title-pattern .neon-line,
+.uiverse-title-pattern .neon-line-inner,
+.uiverse-title-pattern .main-title,
+.uiverse-title-pattern .sub-title,
+.uiverse-title-pattern .letter,
+.uiverse-title-pattern .caption {
+  box-sizing: border-box;
+}
+
+/* Atmospheric Ambient Violet Radial Glow */
+.uiverse-title-pattern .bg-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32rem;
+  height: 32rem;
+  background: radial-gradient(
+    circle,
+    rgba(147, 51, 234, 0.24) 0%,
+    rgba(107, 33, 168, 0.12) 38%,
+    transparent 70%
+  );
+  transform: translate(-50%, -50%);
+  animation: glowBreathing 6s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Subtle Film Grain Noise Overlay */
+.uiverse-title-pattern .bg-noise {
+  position: absolute;
+  inset: -10%;
+  background-image: radial-gradient(rgba(147, 51, 234, 0.12) 1px, transparent 1px),
+    radial-gradient(rgba(107, 33, 168, 0.08) 1px, transparent 1px);
+  background-size:
+    22px 22px,
+    16px 16px;
+  background-position:
+    0 0,
+    8px 8px;
+  opacity: 0.35;
+  z-index: 2;
+  pointer-events: none;
+  animation: noiseJitter 0.4s infinite;
+}
+
+/* Floating Cosmic Dust Particles */
+.uiverse-title-pattern .dust-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.uiverse-title-pattern .dust-layer::before {
+  content: "";
+  position: absolute;
+  width: 2.5px;
+  height: 2.5px;
+  background: transparent;
+  box-shadow:
+    3rem 4rem 1px rgba(168, 85, 247, 0.75),
+    9rem 14rem 1.5px rgba(192, 132, 252, 0.6),
+    16rem 6rem 1px rgba(147, 51, 234, 0.8),
+    24rem 12rem 2px rgba(233, 213, 255, 0.7);
+  animation: dustDrift 20s linear infinite;
+}
+
+/* Stage that holds lines and typography */
+.uiverse-title-pattern .title-stage {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: scale(0.96);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.uiverse-title-pattern:hover .title-stage {
+  transform: scale(1.02);
+}
+
+.uiverse-title-pattern .main-title,
+.uiverse-title-pattern .sub-title {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  line-height: 0.95;
+}
+
+/* Main Title: BLACKOUT */
+.uiverse-title-pattern .main-title {
+  font-size: clamp(3rem, 5.8rem, 6.8rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.08em;
+}
+
+/* Sub Title: HACKATHON */
+.uiverse-title-pattern .sub-title {
+  font-size: clamp(1.4rem, 2.7rem, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  margin-bottom: 0.45em;
+}
+
+.uiverse-title-pattern .main-title .letter:first-child,
+.uiverse-title-pattern .main-title .letter:last-child {
+  font-size: 1.22em;
+}
+
+/* Distinct Individual Kinetic Letters */
+.uiverse-title-pattern .letter {
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+  filter: blur(12px);
+  transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--r, 0deg)) scale(1.5);
+  
+  /* Rich solid Dark Purple Core with Electric Violet Edge */
+  color: var(--neon-primary);
+  -webkit-text-stroke: 1.8px var(--neon-glow);
+  text-shadow:
+    0 2px 14px color-mix(in oklch, var(--neon-glow) 55%, transparent),
+    0 0 28px color-mix(in oklch, var(--neon-glow) 40%, transparent),
+    0 2px 18px color-mix(in oklch, var(--paper) 70%, transparent),
+    0 6px 24px rgba(32, 12, 52, 0.45);
+    
+  animation:
+    letterIntro var(--reset-time) cubic-bezier(0.16, 1, 0.3, 1) infinite,
+    neonFlicker var(--reset-time) linear infinite;
+  animation-delay: var(--d, 0s), 0s;
+  will-change: transform, opacity, filter;
+}
+
+/* Chromatic Jitter & Shadow Underlayers */
+.uiverse-title-pattern .letter::before,
+.uiverse-title-pattern .letter::after {
+  content: attr(data-char);
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.uiverse-title-pattern .letter::before {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(192, 132, 252, 0.7);
+  transform: translate(2px, -2px) rotate(-1.5deg);
+  z-index: -1;
+  animation: sketchJitter 0.18s infinite alternate;
+}
+
+.uiverse-title-pattern .letter::after {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(88, 28, 135, 0.6);
+  transform: translate(-2px, 1.5px) rotate(1.5deg);
+  z-index: -2;
+  animation: sketchJitter2 0.2s infinite alternate;
+}
+
+/* Glowing Electric Violet Header Lines */
+.uiverse-title-pattern .neon-line {
+  position: relative;
+  width: 0%;
+  height: 2px;
+  background: transparent;
+  margin: 0.35em 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lineReveal var(--reset-time) cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  will-change: width, opacity;
+}
+
+.uiverse-title-pattern .neon-line.top-line {
+  margin-bottom: 0.6em;
+}
+
+.uiverse-title-pattern .neon-line.bottom-line {
+  margin-top: 0.45em;
+}
+
+.uiverse-title-pattern .neon-line-inner {
+  width: 100%;
+  height: 100%;
+  border-top: 1.5px solid var(--neon-primary);
+  border-bottom: 1.5px solid var(--neon-glow);
+  box-shadow:
+    0 0 8px var(--neon-glow),
+    0 0 16px rgba(168, 85, 247, 0.6),
+    0 0 32px var(--neon-deep),
+    inset 0 0 2px var(--neon-highlight);
+}
+
+.uiverse-title-pattern .neon-line-inner::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px dashed rgba(192, 132, 252, 0.55);
+  transform: rotate(0.2deg);
+  animation: doodleJitter 0.2s infinite alternate;
+}
+
+/* Sub-Headline Caption */
+.uiverse-title-pattern .caption {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--neon-primary);
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  margin-top: 1.5em;
+  opacity: 0;
+  text-shadow:
+    0 0 8px rgba(168, 85, 247, 0.65),
+    0 1px 12px rgba(255, 255, 255, 0.8);
+  animation: captionFade var(--reset-time) infinite;
+}
+
+/* Atmospheric Sparks & Doodles */
+.uiverse-title-pattern .doodle-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.uiverse-title-pattern .doodle {
+  position: absolute;
+  opacity: 0;
+  animation: doodleFadeBlink 5s infinite;
+}
+
+.uiverse-title-pattern .doodle.spark {
+  width: 12px;
+  height: 12px;
+}
+
+.uiverse-title-pattern .doodle.spark::before,
+.uiverse-title-pattern .doodle.spark::after {
+  content: "";
+  position: absolute;
+  background: var(--neon-glow);
+  box-shadow: 0 0 8px var(--neon-glow);
+}
+
+.uiverse-title-pattern .doodle.spark::before {
+  width: 100%;
+  height: 2px;
+  top: 5px;
+  left: 0;
+}
+
+.uiverse-title-pattern .doodle.spark::after {
+  width: 2px;
+  height: 100%;
+  top: 0;
+  left: 5px;
+}
+
+.uiverse-title-pattern .doodle.scratch {
+  width: 20px;
+  height: 2px;
+  background: transparent;
+  border-top: 2px solid var(--neon-glow);
+  border-bottom: 1px solid var(--neon-deep);
+  transform: rotate(-35deg);
+  box-shadow: 0 0 6px var(--neon-glow);
+}
+
+.uiverse-title-pattern .doodle.dot {
+  width: 4px;
+  height: 4px;
+  background: var(--neon-highlight);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--neon-glow);
+}
+
+.uiverse-title-pattern .d1 { animation-delay: 3s; }
+.uiverse-title-pattern .d2 { animation-delay: 4.2s; }
+.uiverse-title-pattern .d3 { animation-delay: 3.5s; }
+.uiverse-title-pattern .d4 { animation-delay: 4.8s; }
+.uiverse-title-pattern .d5 { animation-delay: 3.9s; }
+.uiverse-title-pattern .d6 { animation-delay: 5.1s; }
+
+.uiverse-title-pattern:hover .doodle {
+  animation-duration: 2s;
+  box-shadow:
+    0 0 16px #fff,
+    0 0 32px var(--neon-glow);
+}
+
+.uiverse-title-pattern:hover .main-title .letter,
+.uiverse-title-pattern:hover .sub-title .letter {
+  -webkit-text-stroke: 2px var(--neon-highlight);
+  text-shadow:
+    0 0 16px rgba(192, 132, 252, 0.95),
+    0 0 32px rgba(168, 85, 247, 0.8),
+    0 0 54px rgba(126, 34, 206, 0.65),
+    0 2px 14px rgba(255, 255, 255, 0.9);
+}
+
+/* Animations */
+@keyframes letterIntro {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--r, 0deg)) scale(1.5);
+  }
+
+  30%,
+  68% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+
+  92%,
+  100% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--r, 0deg)) scale(1.5);
+  }
+}
+
+@keyframes lineReveal {
+  0%,
+  16% {
+    width: 0%;
+    opacity: 0;
+  }
+
+  36%,
+  68% {
+    width: 108%;
+    opacity: 1;
+  }
+
+  84%,
+  100% {
+    width: 0%;
+    opacity: 0;
+  }
+}
+
+@keyframes captionFade {
+  0%,
+  36% {
+    opacity: 0;
+  }
+
+  48%,
+  68% {
+    opacity: 0.9;
+  }
+
+  84%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes glowBreathing {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.65;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1.18);
+    opacity: 1;
+  }
+}
+
+@keyframes neonFlicker {
+  0%,
+  30%,
+  62%,
+  100% {
+    opacity: 1;
+  }
+
+  20%,
+  64% {
+    opacity: 0.5;
+  }
+
+  92%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes doodleJitter {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(1px, -1px) rotate(0.3deg);
+  }
+
+  100% {
+    transform: translate(-1px, 1px) rotate(-0.3deg);
+  }
+}
+
+@keyframes sketchJitter {
+  0% {
+    transform: translate(2px, -2px) rotate(-1.5deg);
+  }
+
+  100% {
+    transform: translate(3px, -1px) rotate(-1deg);
+  }
+}
+
+@keyframes sketchJitter2 {
+  0% {
+    transform: translate(-2px, 1px) rotate(1.5deg);
+  }
+
+  100% {
+    transform: translate(-3px, 2px) rotate(1deg);
+  }
+}
+
+@keyframes noiseJitter {
+  0% {
+    background-position:
+      0 0,
+      8px 8px;
+  }
+
+  50% {
+    background-position:
+      2px -2px,
+      6px 10px;
+  }
+
+  100% {
+    background-position:
+      -2px 2px,
+      10px 6px;
+  }
+}
+
+@keyframes dustDrift {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+
+  100% {
+    transform: translateY(-12rem) translateX(5rem);
+  }
+}
+
+@keyframes doodleFadeBlink {
+  0%,
+  10%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  5% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@media (max-width: 640px) {
+  .uiverse-title-pattern {
+    min-height: 14rem;
+  }
+
+  .uiverse-title-pattern .title-stage {
+    transform: scale(0.72);
+  }
+
+  .uiverse-title-pattern:hover .title-stage {
+    transform: scale(0.76);
+  }
+
+  .uiverse-title-pattern .dust-layer::before {
+    display: none;
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .uiverse-title-pattern .letter {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .uiverse-title-pattern .neon-line {
+    animation: none !important;
+    width: 108% !important;
+    opacity: 1 !important;
+  }
+
+  .uiverse-title-pattern .caption {
+    animation: none !important;
+    opacity: 0.9 !important;
+  }
+
+  .uiverse-title-pattern .bg-glow,
+  .uiverse-title-pattern .bg-noise,
+  .uiverse-title-pattern .doodle {
+    animation: none !important;
+  }
+}

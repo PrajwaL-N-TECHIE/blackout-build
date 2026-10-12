@@ -1,0 +1,119 @@
+/* Surfing Boat on the Tide - Marine Ocean Waves Scene */
+
+.sea-container {
+  position: relative;
+  width: 100%;
+  height: 48vh;
+  min-height: 280px;
+  max-height: 520px;
+  overflow: hidden;
+  background: linear-gradient(180deg, transparent 0%, rgba(14, 165, 233, 0.08) 35%, rgba(10, 77, 104, 0.25) 100%);
+}
+
+/* Horizon line wrapper */
+.sea-container .horizon {
+  position: absolute;
+  top: 15%;
+  width: 100%;
+  height: 5px;
+  background-color: #00ced1;
+  opacity: 0.5;
+  box-shadow: 0 0 20px #00ced1;
+}
+
+/* The Surfing Boat Wrapper handles physics, movement, and positioning */
+.sea-container .boat-wrapper {
+  position: absolute;
+  left: 50%;
+  bottom: 28%;
+  transform: translateX(-50%);
+  z-index: 5; /* Sits perfectly between wave layers */
+  animation: surfPhysics 4s ease-in-out infinite alternate;
+  will-change: transform, left;
+  transition: left 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Inline styling for the boat shape */
+.sea-container .boat {
+  width: 150px;
+  height: auto;
+  filter: drop-shadow(0 10px 8px rgba(0, 30, 60, 0.25));
+  transition: transform 0.3s ease;
+}
+
+.sea-container .boat-wrapper:hover .boat {
+  transform: scale(1.08);
+}
+
+/* Global wave setup using repeating SVG waves for infinite horizontal scrolling */
+.sea-container .wave {
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+/* Back wave layer - Deep Blue & Slowest */
+.sea-container .wave.back {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,60 C300,100 300,20 600,60 C900,100 900,20 1200,60 L1200,120 L0,120 Z" fill="%230f6292"/></svg>');
+  background-size: 50% 160px;
+  z-index: 2;
+  opacity: 0.85;
+  animation: waveScroll 16s linear infinite;
+}
+
+/* Mid wave layer - Bright Teal & Balanced Speed */
+.sea-container .wave.mid {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,50 C300,10 300,90 600,50 C900,10 900,90 1200,50 L1200,120 L0,120 Z" fill="%2320b2aa"/></svg>');
+  background-size: 50% 190px;
+  z-index: 4;
+  animation: waveScroll 10s linear infinite reverse;
+}
+
+/* Front wave layer - Rich Ocean Blue & Fastest */
+.sea-container .wave.front {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,40 C300,90 300,10 600,40 C900,90 900,10 1200,40 L1200,120 L0,120 Z" fill="%230a4d68"/></svg>');
+  background-size: 50% 220px;
+  z-index: 6;
+  animation: waveScroll 6s linear infinite;
+}
+
+/* Infinite horizontal sliding for wave textures */
+@keyframes waveScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Complex bobbing, shifting, and crest-tilting simulation for the boat */
+@keyframes surfPhysics {
+  0% {
+    transform: translate(-50%, 15px) rotate(-8deg);
+  }
+  30% {
+    transform: translate(-45%, -10px) rotate(4deg);
+  }
+  60% {
+    transform: translate(-55%, 8px) rotate(-3deg);
+  }
+  100% {
+    transform: translate(-50%, -20px) rotate(12deg);
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .sea-container .wave.back,
+  .sea-container .wave.mid,
+  .sea-container .wave.front,
+  .sea-container .boat-wrapper {
+    animation: none !important;
+  }
+}
